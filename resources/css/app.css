@@ -5,3 +5,19 @@
 [x-cloak] {
     display: none;
 }
+/* Change Sidebar Background */
+.fi-sidebar {
+    background-color: #1E293B !important;  /* Dark Blue-Grey */
+    color: #F8FAFC !important;            /* Light Gray Text */
+}
+
+/* Change Active Sidebar Item */
+.fi-sidebar-item-active {
+    background-color: #0F172A !important; /* Even Darker Blue */
+    color: #FACC15 !important;            /* Yellow Text */
+}
+
+/* Change Page Background */
+.fi-body {
+    background-color: #F1F5F9 !important;  /* Soft Gray */
+}
