@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\Stock;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Storage;
 
 class Stocks extends Page
 {
@@ -24,5 +25,15 @@ class Stocks extends Page
     public function getStockItems(): array
     {
         return Stock::all()->toArray();
+    }
+
+    public function deleteStock($id)
+    {
+        $stock = Stock::findOrFail($id);
+        if ($stock->image) {
+            Storage::delete('public/' . $stock->image);
+        }
+        $stock->delete();
+        session()->flash('success', 'Stock deleted successfully!');
     }
 }

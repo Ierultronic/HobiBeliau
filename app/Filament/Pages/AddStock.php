@@ -11,7 +11,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
-use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 
@@ -22,6 +23,7 @@ class AddStock extends Page implements HasForms // ✅ Implement HasForms
     protected static ?string $navigationIcon = 'heroicon-o-plus-circle';
     protected static string $view = 'filament.pages.add-stock';
 
+    public ?Stock $stock = null;
     public ?array $data = []; // ✅ Store form data
 
     public function form(Form $form): Form
@@ -43,6 +45,7 @@ class AddStock extends Page implements HasForms // ✅ Implement HasForms
                         FileUpload::make('image')
                             ->label('Stock Image')
                             ->image()
+                            ->directory('stocks') // Saves images in storage/app/public/stocks
                             ->required(),
 
                         TextInput::make('quantity')
@@ -50,6 +53,7 @@ class AddStock extends Page implements HasForms // ✅ Implement HasForms
                             ->numeric()
                             ->minValue(1)
                             ->required(),
+
                         Actions::make([
                              // ✅ Save Stock Button
                             Action::make('save')
