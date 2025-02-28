@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\AddStock;
 use App\Filament\Pages\EditStock;
 use App\Filament\Pages\Stocks;
+use App\Filament\Pages\TransactionList;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -37,12 +38,6 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->registration()
-            // ->colors([
-            //     'primary' => Color::Amber,
-            //     'sidebar' => '#1E293B', // Custom Sidebar Color
-            //     'sidebar-text' => '#F8FAFC', // Sidebar Text
-            //     'background' => '#F1F5F9', // Page Background
-            // ])
             ->colors([
                 'primary' => '#f59e0b', // Amber color
                 'sidebar-background' => '#1E293B', // Dark sidebar
@@ -57,6 +52,7 @@ class AdminPanelProvider extends PanelProvider
                 Stocks::class,
                 AddStock::class,
                 EditStock::class,
+                TransactionList::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -79,6 +75,13 @@ class AdminPanelProvider extends PanelProvider
                             NavigationItem::make('Stocks')
                                 ->icon('heroicon-o-archive-box')
                                 ->url(fn () => route('filament.admin.pages.stocks')),
+                        ]),
+                    NavigationGroup::make()
+                        ->label('Transactions')
+                        ->items([
+                            NavigationItem::make('Transactions List')
+                                ->icon('heroicon-o-archive-box')
+                                ->url(fn () => route('filament.admin.pages.transaction-list')),
                         ]),
                 ])
             )
